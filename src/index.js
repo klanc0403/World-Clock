@@ -1,48 +1,34 @@
-let selectedCityTimeZone = null;
+function updateCity(id, timeZone) {
+  let cityElement = document.querySelector(`#${id}`);
+  if (!cityElement) return;
 
-function updateDefaultCities() {
-  let sanFranciscoElement = document.querySelector("#san-francisco");
-  let londonElement = document.querySelector("#london");
-  let seoulElement = document.querySelector("#seoul");
+  let cityTime = moment().tz(timeZone);
 
-  if (sanFranciscoElement) {
-    let sanFranciscoTime = moment().tz("America/Los_Angeles");
-    sanFranciscoElement.querySelector(".date").innerHTML =
-      sanFranciscoTime.format("MMMM Do YYYY");
-    sanFranciscoElement.querySelector(".time").innerHTML =
-      `${sanFranciscoTime.format("h:mm:ss")} <small>${sanFranciscoTime.format("A")}</small>`;
-  }
-
-  if (londonElement) {
-    let londonTime = moment().tz("Europe/London");
-    londonElement.querySelector(".date").innerHTML =
-      londonTime.format("MMMM Do YYYY");
-    londonElement.querySelector(".time").innerHTML =
-      `${londonTime.format("h:mm:ss")} <small>${londonTime.format("A")}</small>`;
-  }
-
-  if (seoulElement) {
-    let seoulTime = moment().tz("Asia/Seoul");
-    seoulElement.querySelector(".date").innerHTML =
-      seoulTime.format("MMMM Do YYYY");
-    seoulElement.querySelector(".time").innerHTML =
-      `${seoulTime.format("h:mm:ss")} <small>${seoulTime.format("A")}</small>`;
-  }
+  cityElement.querySelector(".date").innerHTML =
+    cityTime.format("MMMM Do YYYY");
+  cityElement.querySelector(".time").innerHTML =
+    `${cityTime.format("h:mm:ss")} <small>${cityTime.format("A")}</small>`;
 }
 
+function updateDefaultCities() {
+  updateCity("san-francisco", "America/Los_Angeles");
+  updateCity("london", "Europe/London");
+  updateCity("seoul", "Asia/Seoul");
+}
+
+let selectedCityTimeZone = null;
+let selectedCityName = null;
+
 function updateSelectedCity() {
-  if (!selectedCityTimeZone) {
-    return;
-  }
+  if (!selectedCityTimeZone) return;
 
   let selectedCityElement = document.querySelector("#selected-city");
   let cityTime = moment().tz(selectedCityTimeZone);
-  let cityName = selectedCityTimeZone.replace("_", " ").split("/")[1];
 
   selectedCityElement.innerHTML = `
     <div class="city">
       <div>
-        <h2>${cityName}</h2>
+        <h2>${selectedCityName}</h2>
         <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
       </div>
       <div class="time">
@@ -53,10 +39,22 @@ function updateSelectedCity() {
 }
 
 function displaySelectedCity(event) {
-  selectedCityTimeZone = event.target.value;
+  let cityTimeZone = event.target.value;
 
-  if (selectedCityTimeZone === "select") {
+  if (cityTimeZone === "select") {
+    document.querySelector("#cities").style.display = "block";
+    document.querySelector("#selected-city").innerHTML = "";
+    selectedCityTimeZone = null;
+    selectedCityName = null;
     return;
+  }
+
+  if (cityTimeZone === "current") {
+    selectedCityTimeZone = moment.tz.guess();
+    selectedCityName = "My Current Location";
+  } else {
+    selectedCityTimeZone = cityTimeZone;
+    selectedCityName = event.target.options[event.target.selectedIndex].text;
   }
 
   document.querySelector("#cities").style.display = "none";
