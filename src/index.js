@@ -1,26 +1,24 @@
-function displayCityTime(event) {
-  let city = event.target.value;
-  let cityTimeElement = document.querySelector("#city-time");
+function updateClock() {
+  let sanFrancisco = moment().tz("America/Los_Angeles");
+  let london = moment().tz("Europe/London");
+  let seoul = moment().tz("Asia/Seoul");
 
-  if (city === "select") {
-    cityTimeElement.innerHTML = "👉 City time here 👈";
-    return;
-  }
+  document.querySelector("#san-francisco-date").innerHTML =
+    sanFrancisco.format("MMMM Do YYYY");
+  document.querySelector("#san-francisco-time").innerHTML =
+    sanFrancisco.format("h:mm:ss") +
+    ` <small>${sanFrancisco.format("A")}</small>`;
 
-  let timeZone = "";
+  document.querySelector("#london-date").innerHTML =
+    london.format("MMMM Do YYYY");
+  document.querySelector("#london-time").innerHTML =
+    london.format("h:mm:ss") + ` <small>${london.format("A")}</small>`;
 
-  if (city === "Paris") {
-    timeZone = "Europe/Paris";
-  } else if (city === "Tokyo") {
-    timeZone = "Asia/Tokyo";
-  } else if (city === "Sydney") {
-    timeZone = "Australia/Sydney";
-  }
-
-  let cityTime = moment().tz(timeZone).format("dddd, MMMM D, YYYY h:mm:ss A");
-
-  cityTimeElement.innerHTML = `It is ${cityTime} in ${city}`;
+  document.querySelector("#seoul-date").innerHTML =
+    seoul.format("MMMM Do YYYY");
+  document.querySelector("#seoul-time").innerHTML =
+    seoul.format("h:mm:ss") + ` <small>${seoul.format("A")}</small>`;
 }
 
-let countriesElement = document.querySelector("#countries");
-countriesElement.addEventListener("change", displayCityTime);
+updateClock();
+setInterval(updateClock, 1000);
