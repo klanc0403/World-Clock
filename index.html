@@ -4,24 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="src/styles.css" />
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.37/moment-timezone-with-data-1970-2030.min.js"></script>
     <title>World Clock</title>
   </head>
   <body>
     <div class="container">
-      <h1>World Clock</h1>
+      <h1>World Clock (Limited)</h1>
 
       <main>
         <label for="countries">Select a city to view its current time.</label>
-      <select name="country" id="countries">
-        <option value="select">Select a country...</option>
-         <option value="Beijing">Beijing</option>
-        <option value="New York">New York</option>
-        <option value="Paris">Paris</option>
-        <option value="San Francisco">San Francisco</option>
-        <option value="Sydney">Sydney</option>
 
+        <select name="country" id="countries">
+          <option value="select">Select a city...</option>
+          <option value="Paris">Paris🇫🇷</option>
+          <option value="Tokyo">Tokyo🇯🇵</option>
+          <option value="Sydney">Sydney🇦🇺</option>
+        </select>
 
+        <div id="city-time">City time: </div>
       </main>
 
       <footer>
