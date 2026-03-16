@@ -1,17 +1,16 @@
 body {
     background-color: #f9f7fe;
     font-family: sans-serif;
+    margin: 60px auto;
 }
 
 .container {
     max-width: 600px;
-    margin: 60px 0;
+    margin: 60px auto;
     background-color: white;
     padding: 30px;
-    margin: 60px 0;
-    box-shadow: 10px 5px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     border-radius: 10px;
-
 }
 
 .date {
@@ -66,4 +65,6 @@ h2 {
 
 footer {
     margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
 }
