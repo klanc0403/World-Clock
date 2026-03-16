@@ -13,16 +13,17 @@
       <h1>World Clock</h1>
 
       <main>
-        <label for="countries">Select a city to view its current time.</label>
+        <label for="city-select">Select a city to view its current time.</label>
 
-        <select name="country" id="countries">
+        <select class="city-select" id="city">
           <option value="select">Select a city...</option>
-          <option value="nyc">New York🗽</option>
-          <option value="Paris">Paris🇫🇷</option>
-          <option value="Sydney">Sydney🇦🇺</option>
-          <option value="Tokyo">Tokyo🇯🇵</option>
+          <option value="America/New_York">New York🗽</option>
+          <option value="Europe/Paris">Paris🇫🇷</option>
+          <option value="Australia/Sydney">Sydney🇦🇺</option>
+          <option value="Asia/Tokyo">Tokyo🇯🇵</option>
         </select>
 
+        <div id="cities">
         <div class="city">
           <div>
             <h2>San Francisco🌉</h2>
@@ -46,6 +47,9 @@
           </div>
           <div class="time" id="seoul-time">5:16 <small>AM</small></div>
         </div>
+        </div>
+
+        <div id="selected-city"></div>
       </main>
 
     </div>
