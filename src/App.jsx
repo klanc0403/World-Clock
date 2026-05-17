@@ -1,6 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
-import moment from 'moment-timezone/builds/moment-timezone-with-data-10-year-range'
-import './App.css'
+const { useEffect, useMemo, useState } = React
 
 const defaultCities = [
   {
@@ -36,17 +34,67 @@ const selectableCities = [
   },
 ]
 
+function getOrdinalSuffix(day) {
+  if (day > 3 && day < 21) {
+    return 'th'
+  }
+
+  switch (day % 10) {
+    case 1:
+      return 'st'
+    case 2:
+      return 'nd'
+    case 3:
+      return 'rd'
+    default:
+      return 'th'
+  }
+}
+
+function formatDate(date, timeZone) {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    day: 'numeric',
+    month: 'long',
+    timeZone,
+    year: 'numeric',
+  }).formatToParts(date)
+
+  const month = parts.find((part) => part.type === 'month').value
+  const day = Number(parts.find((part) => part.type === 'day').value)
+  const year = parts.find((part) => part.type === 'year').value
+
+  return `${month} ${day}${getOrdinalSuffix(day)} ${year}`
+}
+
+function formatTime(date, timeZone) {
+  const formattedTime = new Intl.DateTimeFormat('en-US', {
+    hour: 'numeric',
+    hour12: true,
+    minute: '2-digit',
+    second: '2-digit',
+    timeZone,
+  }).format(date)
+
+  const [time, period] = formattedTime.split(' ')
+
+  return { period, time }
+}
+
 function CityClock({ label, timeZone, now }) {
-  const cityTime = useMemo(() => moment(now).tz(timeZone), [now, timeZone])
+  const date = useMemo(() => formatDate(now, timeZone), [now, timeZone])
+  const { period, time } = useMemo(
+    () => formatTime(now, timeZone),
+    [now, timeZone],
+  )
 
   return (
     <div className="city">
       <div>
         <h2>{label}</h2>
-        <div className="date">{cityTime.format('MMMM Do YYYY')}</div>
+        <div className="date">{date}</div>
       </div>
       <div className="time">
-        {cityTime.format('h:mm:ss')} <small>{cityTime.format('A')}</small>
+        {time} <small>{period}</small>
       </div>
     </div>
   )
@@ -72,7 +120,7 @@ function App() {
     if (selectedTimeZone === 'current') {
       return {
         label: 'My Current Location',
-        timeZone: moment.tz.guess(),
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       }
     }
 
@@ -82,7 +130,7 @@ function App() {
   const visibleCities = selectedCity ? [selectedCity] : defaultCities
 
   return (
-    <>
+    <React.Fragment>
       <div className="container">
         <h1>World Clock</h1>
 
@@ -128,8 +176,8 @@ function App() {
         </a>
         .
       </footer>
-    </>
+    </React.Fragment>
   )
 }
 
-export default App
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
