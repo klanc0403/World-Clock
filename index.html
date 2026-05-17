@@ -1,63 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="src/styles.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.37/moment-timezone-with-data-1970-2030.min.js"></script>
     <title>World Clock</title>
   </head>
   <body>
-    <div class="container">
-      <h1>World Clock</h1>
-
-      <main>
-        <label for="city-select">Select a city to view its current time.</label>
-
-        <select class="city-select" id="city">
-          <option value="select">Select a city...</option>
-          <option value="current">My current location</option>
-          <option value="America/New_York">New York🗽</option>
-          <option value="Europe/Paris">Paris🇫🇷</option>
-          <option value="Australia/Sydney">Sydney🇦🇺</option>
-          <option value="Asia/Tokyo">Tokyo🇯🇵</option>
-        </select>
-
-        <div id="cities">
-        <div class="city">
-          <div>
-            <h2>San Francisco🌉</h2>
-            <div class="date" id="san-francisco-date">March 16th 2026</div>
-          </div>
-          <div class="time" id="san-francisco-time">1:16 <small>PM</small></div>
-        </div>
-
-        <div class="city">
-          <div>
-            <h2>London 🇬🇧</h2>
-            <div class="date" id="london-date">March 16th 2026</div>
-          </div>
-          <div class="time" id="london-time">8:16 <small>PM</small></div>
-        </div>
-
-        <div class="city">
-          <div>
-            <h2>Seoul🇰🇷</h2>
-            <div class="date" id="seoul-date">March 17th 2026</div>
-          </div>
-          <div class="time" id="seoul-time">5:16 <small>AM</small></div>
-        </div>
-        </div>
-
-        <div id="selected-city"></div>
-      </main>
-
-    </div>
-<footer>
-        This project was coded by Kelly Lançon, is hosted on
-        <a href="https://klanc0403.github.io/World-Clock/" target="_blank">GitHub</a>.
-      </footer>
-    <script src="src/index.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

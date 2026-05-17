@@ -1,0 +1,21 @@
+body {
+  background: linear-gradient(270deg, #cd9cf2 0%, #f6f3ff 100%);
+  margin: 0;
+  padding: 120px 20px 0;
+  color: #08060d;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+}
+
+@media (max-width: 640px) {
+  body {
+    padding-top: 40px;
+  }
+}
